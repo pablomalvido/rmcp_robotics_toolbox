@@ -1,0 +1,182 @@
+[project]
+
+name = "roboticstoolbox-python"
+
+description = "A Python library for robotics education and research"
+
+version = "1.3.0"
+
+authors = [
+    { name = "Jesse Haviland", email = "j.haviland@qut.edu.au" },
+    { name = "Peter Corke", email = "rvc@petercorke.com" },
+]
+
+dependencies = [
+    "numpy",
+    "spatialmath-python>=1.1.16",
+    "pgraph-python",
+    "scipy",
+    "matplotlib",
+    "ansitable",
+    "rtb-data>=2.0",
+    "progress",
+    "typing_extensions",
+    "colored>2.0.0",
+    "xacrodoc",
+    "robot_descriptions",
+]
+
+license = { file = "LICENSE" }
+
+readme = "README.md"
+
+requires-python = ">=3.10"
+
+keywords = [
+    "python",
+    "robotics",
+    "robotics-toolbox",
+    "kinematics",
+    "dynamics",
+    "motion-planning",
+    "trajectory-generation",
+    "jacobian",
+    "hessian",
+    "control",
+    "simulation",
+    "robot-manipulator",
+    "mobile-robot",
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    # Indicate who your project is intended for
+    "Intended Audience :: Developers",
+    # Pick your license as you wish (should match "license" above)
+    "License :: OSI Approved :: MIT License",
+    # Specify the Python versions you support here.
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+
+[project.urls]
+homepage = "https://petercorke.github.io/robotics-toolbox-python/"
+documentation = "https://petercorke.github.io/robotics-toolbox-python/"
+repository = "https://github.com/petercorke/robotics-toolbox-python"
+
+
+[project.optional-dependencies]
+
+swift = ["swift-sim>=1.0.0", "websockets"]
+
+collision = ["coal; sys_platform != 'win32'", "trimesh"]
+
+qp = ["qpsolvers", "quadprog"]
+
+all = [
+    "swift-sim>=1.0.0",
+    "websockets",
+    "qpsolvers",
+    "quadprog",
+    "coal; sys_platform != 'win32'",
+    "trimesh",
+]
+
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-timeout",
+    "pyyaml",
+    "sympy",
+    "qpsolvers",
+    "quadprog",
+    "bdsim",
+    "ruff",
+    "coal; sys_platform != 'win32'",
+    "trimesh",
+]
+
+# Backward-compatible alias; notebook tooling is included in "dev".
+nb = ["pytest-nbmake"]
+
+docs = [
+    "sphinx",
+    "sphinx_rtd_theme",
+    "sphinx-autorun",
+    "sphinx_autodoc_typehints",
+    "sphinx-favicon",
+]
+
+
+[project.scripts]
+
+eigdemo = "roboticstoolbox.examples.eigdemo:main"
+tripleangledemo = "roboticstoolbox.examples.tripleangledemo:main"
+twistdemo = "roboticstoolbox.examples.twistdemo:main"
+rtbtool = "roboticstoolbox.bin.rtbtool:main"
+
+
+[build-system]
+
+requires = ["scikit-build-core>=0.9", "numpy", "nanobind>=2"]
+build-backend = "scikit_build_core.build"
+
+
+[tool.scikit-build]
+wheel.packages = ["src/roboticstoolbox", "src/spatialgeometry"]
+sdist.include = [
+    "src/roboticstoolbox",
+    "src/spatialgeometry",
+    "tests",
+    "CMakeLists.txt",
+    "README.md",
+    "LICENSE",
+]
+sdist.exclude = ["rtb-data/**"]
+
+
+[tool.ruff]
+line-length = 88
+exclude = [".git", "build", "dist", "docs", ".venv", ".tox"]
+
+[tool.ruff.lint]
+ignore = ["F821", "E741", "E203"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+
+[tool.cibuildwheel]
+
+build = ["cp310-*", "cp311-*", "cp312-*", "cp313-*"]
+skip = ["*musllinux*"]
+
+[tool.cibuildwheel.macos]
+archs = ["auto"] # arm64 only from macos-latest; x86_64 EOL
+
+[tool.cibuildwheel.linux]
+archs = [
+    "auto",
+] # native arch only; arm64 uses ubuntu-24.04-arm runner (no QEMU)
+
+[tool.cibuildwheel.windows]
+archs = ["AMD64"]
+
+[tool.cibuildwheel.pyodide]
+# Pyodide (wasm32-emscripten) — used by JupyterLite
+# cibuildwheel manages the Emscripten SDK; scikit-build-core picks up
+# the toolchain file automatically from the PYODIDE environment.
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore:FigureCanvasAgg is non-interactive:UserWarning",
+]
+
+[tool.coverage.run]
+omit = ["src/roboticstoolbox/examples/*", "test_*.py"]
