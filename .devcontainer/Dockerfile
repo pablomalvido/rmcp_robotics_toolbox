@@ -35,7 +35,8 @@ RUN python3 -m pip install \
     "numpy<2" \
     matplotlib==3.7.2 \
     #roboticstoolbox-python[all] \
-    swift-sim
+    #swift-sim
+    sympy
 
 WORKDIR /workspace
 

@@ -43,6 +43,16 @@ class RobotPlot3:
 
         self.jointcylinders = []
 
+        # Blue tool line
+        self.tool_link = None
+        (self.tool_link,) = self.ax.plot(
+            [0],
+            [0],
+            [0],
+            color="blue",
+            linewidth=3,
+        )
+
         # Text of the robots name
         self.name = None
 
@@ -95,6 +105,11 @@ class RobotPlot3:
         # compute all link frames
         T = self.robot.fkine_all(self.robot.q)
 
+        # Last joint frame
+        eelink = self.robot.ee_links[0]
+        Tlast = T[eelink.number]
+        Ttool = Tlast * self.robot.tool
+
         # draw all the line segments for the noodle plot
         for i, segment in enumerate(self.segments):
             linkframes = []
@@ -146,6 +161,13 @@ class RobotPlot3:
                 zaxis = self._plot_quiver(Te.t, Tez.t, self.options["eez"])
 
                 self.eeframes.extend([xaxis, yaxis, zaxis])
+            
+            p1 = Tlast.t
+            p2 = Ttool.t
+
+            self.tool_link.set_xdata([p1[0], p2[0]])
+            self.tool_link.set_ydata([p1[1], p2[1]])
+            self.tool_link.set_3d_properties([p1[2], p2[2]])
 
         ## Joint axes
 
