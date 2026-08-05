@@ -90,7 +90,7 @@ git clone https://github.com/pablomalvido/rmcp_robotics_toolbox.git
 
 Then, open the folder ```rmcp_robotics_toolbox``` in Visual Studio Code. Before executing the next step, Docker Desktop must be running.
 
-**4. Select *Dev Containers: Reopen in Container* command from the Command Palette (F1)**
+**3. Select *Dev Containers: Reopen in Container* command from the Command Palette (F1)**
 
 The container will be built automatically, as required.
 
