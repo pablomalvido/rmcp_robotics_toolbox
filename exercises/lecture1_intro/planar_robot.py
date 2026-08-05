@@ -10,4 +10,4 @@ planarRobot = DHRobot(
 
 print(planarRobot)
 
-planarRobot.plot([0,0,0,0], backend="pyplot3")
+planarRobot.teach([0,0], backend="pyplot3")

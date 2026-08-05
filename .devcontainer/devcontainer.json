@@ -8,6 +8,10 @@
 
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
 
+    // "mounts": [
+    //     "source=/tmp/.X11-unix,target=/tmp/.X1-unix,type=bind"
+    // ],
+
     // "runArgs": [
     //     "--network=host"
     // ],
@@ -39,6 +43,8 @@
             ]
         }
     },
+
+    "postCreateCommand": "cd /workspace/robotics-toolbox-python && pip install -e .",
 
     "remoteUser": "root"
 }

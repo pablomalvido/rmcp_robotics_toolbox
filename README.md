@@ -103,16 +103,18 @@ Follow these steps (check video from 17:48 to 18:40): https://youtu.be/qWuudNxFG
 
 Clone the repository in a folder:
 ```
-git clone -b linux https://github.com/pablomalvido/rmcp_ros2_humble_pkg.git
+git clone https://github.com/pablomalvido/rmcp_robotics_toolbox.git
 ```
 
 **2. Open Visual Studio Code ...**
 
-Then, open the folder ```rmcp_ros2_humble_pkg``` in Visual Studio Code
+Then, open the folder ```rmcp_robotics_toolbox``` in Visual Studio Code
 
 **3. Modify devcontainer**
 
-Open .devcontainer/devcontainer.json and substitute these lines of code:
+Open .devcontainer/devcontainer.json and make the following modifications:
+
+Substitute these lines of code:
 
 ```
 "containerEnv": {
@@ -127,6 +129,14 @@ by these:
 "containerEnv": {
         "DISPLAY": "${localEnv:DISPLAY}"
     },
+```
+
+Uncomment these lines:
+
+```
+"mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X1-unix,type=bind"
+],
 ```
 
 **4. Choose Reopen in container when prompted**
