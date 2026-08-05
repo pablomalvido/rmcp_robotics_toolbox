@@ -27,7 +27,7 @@
     },
 
     "containerEnv": {
-        "DISPLAY": "host.docker.internal:0.0",
+        "DISPLAY": "host.docker.internal:0.0", //"${localEnv:DISPLAY}"
         "LIBGL_ALWAYS_INDIRECT": "1"
     },
 

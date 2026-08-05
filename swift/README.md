@@ -1,1 +1,0 @@
-This repository is an adaptation of https://github.com/jhavl/swift including some modifications. Check official repository for documentation.
