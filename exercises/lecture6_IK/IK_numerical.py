@@ -91,7 +91,7 @@ g = sp.Matrix([0.456, 0.17]) # goal position [X,Y]
 Q = sp.Matrix([np.pi/10, np.pi/10]) # joint values (arbitrary initial values)
 thr = 0.001 # Threshold error
 k = 0.01 # Iteration step
-max_iter = 1000
+max_iter = 1000##
 
 e = FK[:2,3].subs({t1:Q[0], t2:Q[1]}).evalf()
 position_error = g - e

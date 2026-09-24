@@ -2,7 +2,7 @@ from roboticstoolbox import DHRobot,RevoluteMDH,PrismaticMDH
 import numpy as np
 
 # Scara: RRRP
-# Case 1: RRR positive CCW, P positive UP
+# Case 1: RRR positive CCW, P positive DOWN
 scaraRobot = DHRobot(
     [
         RevoluteMDH(d=0.5),
@@ -12,6 +12,7 @@ scaraRobot = DHRobot(
     ], name="scaraRobot")
 
 print(scaraRobot)
+
 scaraRobot.teach([0,0,0,0], backend="pyplot3")
 
 # Case 2: RRR positive CCW, P positive DOWN
@@ -24,7 +25,8 @@ scaraRobot2 = DHRobot(
     ], name="scaraRobot2")
 
 print(scaraRobot2)
-scaraRobot2.teach([0,0,0,0], backend="pyplot3")
+
+#scaraRobot2.teach([0,0,0,0], backend="pyplot3")
 
 # Case 3: RRR positive CW, P positive DOWN
 scaraRobot3 = DHRobot(
@@ -36,4 +38,8 @@ scaraRobot3 = DHRobot(
     ], name="scaraRobot3")
 
 print(scaraRobot3)
-scaraRobot3.teach([0,0,0,0], backend="pyplot3")
+
+#scaraRobot3.teach([0,0,0,0], backend="pyplot3")
+
+#scara3.tool=
+#scara3.base=

@@ -29,5 +29,6 @@ greenTarget=SE3.Trans(.6,.6,0.025/2) * SE3.Rz(-math.pi/4) * SE3.Ry(math.pi)
 q = scaraRobot2.ikine_LM(greenTarget,mask=[1,1,1,0,0,1],q0=[np.pi/2, np.pi/2, np.pi/2, .4]) #Mask: We cannot control Rx and Ry cartesian. q0: Initial values, not any specific reason
 print(q.q)
 x_fk = scaraRobot2.fkine(q.q)
+print(greenTarget)
 print(x_fk)
 plotRobotAndFrame(scaraRobot2,q.q,greenTarget,plt)

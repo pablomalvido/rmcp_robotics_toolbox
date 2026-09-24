@@ -13,9 +13,6 @@ t2 = symbols('t2')
 t3 = symbols('t3')
 d4 = symbols('d4')
 
-sys.path.append(str(Path(__file__).resolve().parents[1])) # add ws directory to the path to import from utils
-from utils.plotHelper import plotRobotAndFrame, conditional_teach
-
 # Scara: RRRP. RRR positive CCW, P positive DOWN
 scaraRobot2 = DHRobot(
     [
@@ -30,14 +27,15 @@ print(scaraRobot2)
 scaraRobot2.tool = SE3.Trans(-0.03, 0, 0.135)
 scaraRobot2.base = SE3.Trans(0.1,0.1,0.2)
 
-#Some target
-greenTarget=SE3.Trans(.6,.6,0.025/2) * SE3.Rz(-math.pi/4) * SE3.Ry(math.pi)
+q = [0.83, 0.0, -4.75, 0.55]
+print("Joint values")
+print(q)
+print()
 
-q = scaraRobot2.ikine_LM(greenTarget,mask=[1,1,1,0,0,1],q0=[np.pi/2, np.pi/2, np.pi/2, .4]) #Mask: We cannot control Rx and Ry cartesian. q0: Initial values, not any specific reason
-print(q.q)
-x_fk = scaraRobot2.fkine(q.q)
+x_fk = scaraRobot2.fkine(q)
+print("fkine solution")
 print(x_fk)
-#plotRobotAndFrame(scaraRobot2,q.q,greenTarget,plt)
+print()
 
 ##### Manual FK symbolic#### 
 def RotX(alpha):
@@ -95,14 +93,16 @@ T_0_4 = T_0_1*T_1_2*T_2_3*T_3_4
 T_world_0 = Trans(0.1,0.1,0.2) # From world to base
 T_4_tool = Trans(-0.03, 0, 0.135) # From last link to TCP
 T_world_tool = T_world_0 * T_0_4 * T_4_tool
+print("FK symbolic")
 sp.pprint(T_world_tool)
 
 T_world_tool_eval = T_world_tool.subs({
-    t1: q.q[0],
-    t2: q.q[1],
-    t3: q.q[2],
-    d4: q.q[3]
+    t1: q[0],
+    t2: q[1],
+    t3: q[2],
+    d4: q[3]
 })
 
 print()
+print("FK custom solution")
 sp.pprint(T_world_tool_eval.evalf())
