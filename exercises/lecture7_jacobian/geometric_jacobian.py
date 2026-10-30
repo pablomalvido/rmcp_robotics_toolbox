@@ -90,8 +90,7 @@ Jv6 = sp.Matrix([z6.cross(p6 - p6)])
 Jw6 = z6
 
 Jv = sp.Matrix.hstack(
-    Jv1, Jv2, Jv3,
-    Jv4, Jv5, Jv6
+    Jv1, Jv2, Jv3, Jv4, Jv5, Jv6
 )
 
 Jw = sp.Matrix.hstack(
@@ -113,8 +112,8 @@ Jv_det_sym = Jv[:,:3].det()
 sp.pprint(Jv_det_sym)
 print()
 
-Jv_det = Jv_det_sym.subs({t1:0, t2:np.pi/4, t3:np.pi/2}).evalf()
+Jv_det = Jv_det_sym.subs({t1:0, t2:np.pi/4, t3:np.pi/4}).evalf()
 sp.pprint("Determinant Position Jacobian: " + str(Jv_det))
 
-J_det = J.det().subs({t1:0, t2:np.pi/4, t3:np.pi/2, t4:0, t5:0, t6:0})
+J_det = J.det().subs({t1:0, t2:np.pi/4, t3:np.pi/4, t4:0, t5:0, t6:0})
 sp.pprint("Determinant Jacobian: " + str(J_det))

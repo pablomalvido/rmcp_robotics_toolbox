@@ -17,18 +17,18 @@ robot3 = DHRobot(
         RevoluteMDH(a=l2),
     ], name="robot3")
 
-print(robot3)
+# print(robot3)
 
 robot3.tool = SE3.Tx(l3)
 
 ## Numeric ##
 x = SE3(tx, ty, 0.0) * SE3.Rz(rz)
-q = robot3.ikine_LM(x,mask=[1,1,0,0,0,1],q0=[np.pi/2, -np.pi/2, -np.pi/4]) #Numeric IK: requires target, mask cartesian, init search values
+q = robot3.ikine_LM(x,mask=[1,1,0,0,0,1],q0=[-np.pi/2, np.pi/2, -np.pi/4]) #Numeric IK: requires target, mask cartesian, init search values
 print(q.q)
 
 x_fk = robot3.fkine(q.q)
 print(x_fk)
-#robot3.teach(q.q, backend="pyplot3")
+robot3.teach(q.q, backend="pyplot3")
 
 ## Analytic IK ##
 wx = tx - l3 * np.cos(-rz)

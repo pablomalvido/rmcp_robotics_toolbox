@@ -11,7 +11,7 @@ q=[0, np.pi/6, -np.pi/4, 0, np.pi/4, 0]
 T = robot.fkine(q)
 
 t_init = time.perf_counter()
-sol = robot.ikine_a(T, config="lun") #Same than ikine_6s for PUMA. Internally calls ikine_6s for a specific ikfunc
+sol = robot.ikine_a(T, config="run") #Same than ikine_6s for PUMA. Internally calls ikine_6s for a specific ikfunc
 print("IKINE 6S")
 elapsed_ms = (time.perf_counter() - t_init)*1000
 print("Computation time: " + str(elapsed_ms) + " ms")

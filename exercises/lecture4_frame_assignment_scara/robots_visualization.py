@@ -25,6 +25,16 @@ DH_Robot3 = DHRobot(
         RevoluteMDH(alpha=-np.pi/2),
     ], name="DH_Robot3")
 
+# DH_Robot4 = DHRobot(
+#     [
+#         RevoluteMDH(d=0.5),
+#         PrismaticMDH(alpha=-np.pi/2, theta=-np.pi/2, qlim=[0,0.3]),
+#         RevoluteMDH(alpha=-np.pi/2),
+#         RevoluteMDH(a=0.3),
+#         RevoluteMDH(alpha=np.pi/2, d=0.3),
+#     ], name="DH_Robot4")
+
 #DH_Robot1.teach([0,0,0], backend="pyplot3")
 #DH_Robot2.teach([0,0,0,0], backend="pyplot3")
 DH_Robot3.teach([0,0,0,0,0], backend="pyplot3")
+#DH_Robot4.teach([0,0,0,0,0], backend="pyplot3")

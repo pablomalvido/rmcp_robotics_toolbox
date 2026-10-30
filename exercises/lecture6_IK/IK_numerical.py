@@ -4,6 +4,11 @@ from spatialmath import SE3
 import matplotlib.pyplot as plt
 import sympy as sp
 from sympy import symbols, cos, sin
+from pathlib import Path
+import sys
+
+sys.path.append(str(Path(__file__).resolve().parents[1])) # add ws directory to the path to import from utils
+from utils.plotHelper import plotRobotAndFrame
 
 t1 = symbols('t1')
 t2 = symbols('t2')
@@ -91,7 +96,7 @@ g = sp.Matrix([0.456, 0.17]) # goal position [X,Y]
 Q = sp.Matrix([np.pi/10, np.pi/10]) # joint values (arbitrary initial values)
 thr = 0.001 # Threshold error
 k = 0.01 # Iteration step
-max_iter = 1000##
+max_iter = 1000 #10
 
 e = FK[:2,3].subs({t1:Q[0], t2:Q[1]}).evalf()
 position_error = g - e
@@ -116,5 +121,7 @@ plt.ylabel("Position error")
 plt.title("IK convergence")
 plt.grid(True)
 plt.show()
+
+plotRobotAndFrame(serialRobot,[float(Q[0]),float(Q[1])],SE3.Trans(float(g[0]), float(g[1]),0),plt)
 
 serialRobot.teach([float(Q[0]),float(Q[1])],backend='pyplot3')
